@@ -9,22 +9,32 @@ if getattr(sys, 'frozen', False):
         tkdnd_dir = os.path.join(os.path.dirname(sys.executable), 'tkdnd')
 
 from PyQt5.QtWidgets import (
-    QApplication, QWidget, QMessageBox, QFileDialog, QTableWidgetItem
+    QApplication, QWidget, QMessageBox, QFileDialog, QTableWidgetItem, QHeaderView
 )
 from PyQt5.QtCore import Qt, QSize
-from PyQt5.QtGui import QFont, QIcon, QPixmap, QPainter, QBrush, QPen, QPainterPath
+from PyQt5.QtGui import QFont, QIcon, QPixmap, QPainter, QBrush, QPen, QPainterPath, QImage
 from PIL import Image
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
 
 class DragDropWidget(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi("tga_to_png_tool.ui", self)
+        uic.loadUi(resource_path("tga_to_png_tool.ui"), self)
         self.setWindowTitle('視創用TGA/PNG轉檔工具')
+        self.setWindowIcon(QIcon(resource_path("images/icon.ico")))
         # 設定圓角圖片按鈕
-        self.set_rounded_icon(self.btn_tga_to_png, "images/01.png", 48, 8)
+        self.set_rounded_icon(self.btn_tga_to_png, resource_path("images/01.png"), 48, 8)
         self.btn_tga_to_png.setFixedSize(56, 56)
         self.btn_tga_to_png.setText("")
-        self.set_rounded_icon(self.btn_png_to_tga, "images/02.png", 48, 8)
+        self.set_rounded_icon(self.btn_png_to_tga, resource_path("images/02.png"), 48, 8)
         self.btn_png_to_tga.setFixedSize(56, 56)
         self.btn_png_to_tga.setText("")
         # 綁定所有按鈕事件
@@ -41,6 +51,9 @@ class DragDropWidget(QWidget):
         self.btn_close.clicked.connect(self.show_about)
         self.btn_browse.clicked.connect(self.browse_folder)
         self.btn_convert.clicked.connect(self.convert_files)
+        self.fileTable.itemSelectionChanged.connect(self.update_preview)
+        # 設定表格欄位自動填滿寬度
+        self.fileTable.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         # 拖曳功能（主視窗層級）
         self.setAcceptDrops(True)
         # 預設模式
@@ -165,7 +178,41 @@ class DragDropWidget(QWidget):
             '支援TGA與PNG批次互轉，拖曳/多選/自訂輸出路徑。\n'
             '作者：Cyrus\n'
             '版本：1.0\n'
-            '聯絡方式：your@email.com')
+            '最後更新：2025/12/22')
+
+    def update_preview(self):
+        row = self.fileTable.currentRow()
+        if row >= 0:
+            item = self.fileTable.item(row, 0)
+            if item:
+                path = item.data(Qt.UserRole)
+                self.show_preview_image(path)
+                return
+        self.previewLabel.setText("預覽")
+        self.previewLabel.setPixmap(QPixmap())
+
+    def show_preview_image(self, path):
+        if not path or not os.path.exists(path):
+            self.previewLabel.setText("檔案不存在")
+            return
+        
+        pixmap = QPixmap(path)
+        if pixmap.isNull():
+            try:
+                with Image.open(path) as img:
+                    if img.mode != "RGBA":
+                        img = img.convert("RGBA")
+                    data = img.tobytes("raw", "RGBA")
+                    qimg = QImage(data, img.width, img.height, QImage.Format_RGBA8888)
+                    pixmap = QPixmap.fromImage(qimg)
+            except Exception:
+                pass
+        
+        if not pixmap.isNull():
+            rect = self.previewLabel.contentsRect()
+            self.previewLabel.setPixmap(pixmap.scaled(rect.width(), rect.height(), Qt.KeepAspectRatio, Qt.SmoothTransformation))
+        else:
+            self.previewLabel.setText("無法預覽")
 
     # 拖曳進表格
     def dragEnterEvent(self, event):

@@ -46,145 +46,197 @@
     </layout>
    </item>
    <item>
-    <widget class="QTableWidget" name="fileTable">
-    <property name="columnCount">
-     <number>3</number>
-    </property>
-    <property name="rowCount">
-     <number>0</number>
-    </property>
-    <column>
-     <property name="text">
-      <string>檔名</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>大小</string>
-     </property>
-    </column>
-    <column>
-     <property name="text">
-      <string>格式</string>
-     </property>
-    </column>
-     <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
-     </property>
-     <property name="dragDropMode">
-      <enum>QAbstractItemView::DropOnly</enum>
-     </property>
-     <property name="acceptDrops">
-      <bool>true</bool>
-     </property>
-     <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
-     </property>
-     <property name="alternatingRowColors">
-      <bool>true</bool>
-     </property>
-     <property name="showGrid">
-      <bool>true</bool>
-     </property>
-     <property name="minimumHeight">
-      <number>300</number>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="fileActionLayout">
+    <layout class="QHBoxLayout" name="middleLayout">
      <item>
-      <widget class="QPushButton" name="btn_add_file">
-       <property name="text">
-        <string>添加檔案</string>
+      <widget class="QTableWidget" name="fileTable">
+       <property name="columnCount">
+        <number>3</number>
+       </property>
+       <property name="rowCount">
+        <number>0</number>
+       </property>
+       <column>
+        <property name="text">
+         <string>檔名</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>大小</string>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>格式</string>
+        </property>
+       </column>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::DropOnly</enum>
+       </property>
+       <property name="acceptDrops">
+        <bool>true</bool>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="showGrid">
+        <bool>true</bool>
+       </property>
+       <property name="minimumHeight">
+        <number>300</number>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btn_remove_file">
-       <property name="text">
-        <string>移除</string>
+      <widget class="QLabel" name="previewLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btn_clear">
-       <property name="text">
-        <string>清空</string>
+       <property name="minimumSize">
+        <size>
+         <width>250</width>
+         <height>0</height>
+        </size>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="btn_close">
+       <property name="frameShape">
+        <enum>QFrame::StyledPanel</enum>
+       </property>
        <property name="text">
-        <string>闔於</string>
+        <string>預覽</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="QGroupBox" name="outputGroup">
-     <property name="title">
-      <string>輸出設定</string>
-     </property>
-     <layout class="QVBoxLayout" name="outputLayout">
-      <item>
-       <widget class="QRadioButton" name="radio_current_folder">
-        <property name="text">
-         <string>保存在當前資料夾位置</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="customPathLayout">
-        <item>
-         <widget class="QRadioButton" name="radio_custom_folder">
-          <property name="text">
-           <string>自定位置</string>
+    <layout class="QHBoxLayout" name="combinedBottomLayout">
+     <item>
+      <layout class="QVBoxLayout" name="bottomLeftLayout">
+       <item>
+        <layout class="QHBoxLayout" name="fileActionLayout">
+         <item>
+          <widget class="QPushButton" name="btn_add_file">
+           <property name="text">
+            <string>添加檔案</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_remove_file">
+           <property name="text">
+            <string>移除</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_clear">
+           <property name="text">
+            <string>清空</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btn_close">
+           <property name="text">
+            <string>闔於</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="outputGroup">
+         <property name="title">
+          <string>輸出設定</string>
+         </property>
+         <layout class="QVBoxLayout" name="outputLayout">
+          <property name="spacing">
+           <number>4</number>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="line_custom_path">
-          <property name="text">
-           <string>D:/</string>
+          <property name="leftMargin">
+           <number>4</number>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btn_browse">
-          <property name="text">
-           <string>[...]</string>
+          <property name="topMargin">
+           <number>4</number>
           </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btn_convert">
-          <property name="text">
-           <string>轉檔</string>
+          <property name="rightMargin">
+           <number>4</number>
           </property>
-          <property name="minimumWidth">
-           <number>48</number>
+          <property name="bottomMargin">
+           <number>4</number>
           </property>
-          <property name="maximumWidth">
-           <number>48</number>
-          </property>
-          <property name="minimumHeight">
-           <number>48</number>
-          </property>
-          <property name="maximumHeight">
-           <number>48</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
+          <item>
+           <widget class="QRadioButton" name="radio_current_folder">
+            <property name="text">
+             <string>當前資料夾位置</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="customPathLayout">
+            <item>
+             <widget class="QRadioButton" name="radio_custom_folder">
+              <property name="text">
+               <string>自定位置</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="line_custom_path">
+              <property name="text">
+               <string>D:/</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="btn_browse">
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_convert">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>80</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>轉檔</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
     <!-- 移除底部轉檔按鈕 -->
   </layout>

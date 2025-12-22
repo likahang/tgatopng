@@ -5,7 +5,7 @@ a = Analysis(
     ['tga_to_png_tool.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('tga_to_png_tool.ui', '.'), ('images', 'images')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -35,4 +35,5 @@ exe = EXE(
     target_arch=None,
     codesign_identity=None,
     entitlements_file=None,
+    icon=['images\\icon.ico'],
 )

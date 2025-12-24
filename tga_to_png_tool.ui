@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,44 +16,62 @@
   <layout class="QVBoxLayout" name="mainLayout">
    <item>
     <layout class="QHBoxLayout" name="topButtonLayout">
-    <item>
-     <widget class="QPushButton" name="btn_tga_to_png">
-      <property name="text">
-       <string>TGA轉PNG</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btn_png_to_tga">
-      <property name="text">
-       <string>PNG轉TGA</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <spacer name="topButtonSpacer">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <property name="sizeHint" stdset="0">
-       <size>
-        <width>40</width>
-        <height>20</height>
-       </size>
-      </property>
-     </spacer>
-    </item>
+     <item>
+      <widget class="QPushButton" name="btn_tga_to_png">
+       <property name="text">
+        <string>TGA轉PNG</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btn_png_to_tga">
+       <property name="text">
+        <string>PNG轉TGA</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="topButtonSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
     </layout>
    </item>
    <item>
     <layout class="QHBoxLayout" name="middleLayout">
      <item>
       <widget class="QTableWidget" name="fileTable">
-       <property name="columnCount">
-        <number>3</number>
+       <property name="acceptDrops">
+        <bool>true</bool>
+       </property>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
+       </property>
+       <property name="dragDropMode">
+        <enum>QAbstractItemView::DropOnly</enum>
+       </property>
+       <property name="alternatingRowColors">
+        <bool>true</bool>
+       </property>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
+       </property>
+       <property name="showGrid">
+        <bool>true</bool>
        </property>
        <property name="rowCount">
         <number>0</number>
+       </property>
+       <property name="columnCount">
+        <number>3</number>
        </property>
        <column>
         <property name="text">
@@ -70,27 +88,6 @@
          <string>格式</string>
         </property>
        </column>
-       <property name="selectionBehavior">
-        <enum>QAbstractItemView::SelectRows</enum>
-       </property>
-       <property name="dragDropMode">
-        <enum>QAbstractItemView::DropOnly</enum>
-       </property>
-       <property name="acceptDrops">
-        <bool>true</bool>
-       </property>
-       <property name="editTriggers">
-        <set>QAbstractItemView::NoEditTriggers</set>
-       </property>
-       <property name="alternatingRowColors">
-        <bool>true</bool>
-       </property>
-       <property name="showGrid">
-        <bool>true</bool>
-       </property>
-       <property name="minimumHeight">
-        <number>300</number>
-       </property>
       </widget>
      </item>
      <item>
@@ -150,7 +147,7 @@
          <item>
           <widget class="QPushButton" name="btn_close">
            <property name="text">
-            <string>闔於</string>
+            <string>關於</string>
            </property>
           </widget>
          </item>
@@ -215,6 +212,19 @@
          </layout>
         </widget>
        </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
       </layout>
      </item>
      <item>
@@ -227,7 +237,7 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>80</width>
+         <width>100</width>
          <height>0</height>
         </size>
        </property>
@@ -238,7 +248,6 @@
      </item>
     </layout>
    </item>
-    <!-- 移除底部轉檔按鈕 -->
   </layout>
  </widget>
  <resources/>

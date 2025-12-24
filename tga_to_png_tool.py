@@ -28,6 +28,10 @@ class DragDropWidget(QWidget):
     def __init__(self):
         super().__init__()
         uic.loadUi(resource_path("tga_to_png_tool.ui"), self)
+        # 手動設定佈局延伸比例 (索引 1 為中間區域，設為 1 表示延伸)
+        self.mainLayout.setStretch(0, 0)
+        self.mainLayout.setStretch(1, 1)
+        self.mainLayout.setStretch(2, 0)
         self.setWindowTitle('視創用TGA/PNG轉檔工具')
         self.setWindowIcon(QIcon(resource_path("images/icon.ico")))
         # 設定圓角圖片按鈕

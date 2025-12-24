@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual Environment
+.venv310/
+venv/
+.env
+
+# PyInstaller artifacts
+
+# PyInstaller artifacts
+build/
+dist/
+*.spec
+
+# Ignore design and large binary files
+*.psd
+*.exe
+*.pkg
+*.toc
+*.pyz
+*.zip
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
+*.DS_Store
+
+# Ignore all images and design files in images/
+images/
+
+# IDE settings
+.vscode/
+.idea/
